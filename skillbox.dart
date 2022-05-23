@@ -1,22 +1,42 @@
 int abs(int x) => x <= 0 ? -x : x;
 
-int nod(int a, int b) {
-  int res = 1;
-  if (a != 0 && b != 0) {
-    for (int delimeter = abs(a) <= abs(b) ? abs(a) : abs(b);
-        delimeter > 0;
-        delimeter--) {
-      if (a % delimeter == 0 && b % delimeter == 0) {
-        res = delimeter;
+class DelimetersCalculator {
+  static int nod(int a, int b) {
+    int res, dividend, divisor;
+    if (abs(a) >= abs(b)) {
+      dividend = a;
+      divisor = b;
+    } else {
+      dividend = b;
+      divisor = a;
+    }
+    while (dividend != 0) {
+      res = dividend % divisor;
+      if (res == 0) {
         break;
+      } else {
+        dividend = divisor;
+        divisor = res;
       }
     }
-  } else {
-    res = abs(b) >= abs(a) ? abs(b) : abs(a);
+    return divisor;
   }
-  return res;
+
+  static int nok(int a, int b) {
+    int res = 1;
+    int commonNum = nod(a, b);
+    res = (a * b) ~/ commonNum;
+    return res;
+  }
+
+  static List<int> simpleDigits(int num) {
+    List<int> digitsList = [];
+    // for(int i = 0; i < )
+
+    return digitsList;
+  }
 }
 
 void main() {
-  print(nod(-4, 12));
+  print(DelimetersCalculator.nod(21, 24));
 }
