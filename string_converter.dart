@@ -1,3 +1,16 @@
+enum Digits {
+  zero,
+  one,
+  two,
+  three,
+  four,
+  five,
+  six,
+  seven,
+  eight,
+  nine,
+}
+
 class StringConverter {
   static List<num> findNums(String str) {
     List<num> list = [];
@@ -22,5 +35,18 @@ class StringConverter {
       }
     }
     return res;
+  }
+
+  static List<int> digitCollection(String input) {
+    Set<int> enums = {};
+    List<String> values = input.split(' ');
+    for (String val in values) {
+      for (var elem in Digits.values) {
+        if (elem.name == val) {
+          enums.add(elem.index);
+        }
+      }
+    }
+    return enums.toList()..sort();
   }
 }
