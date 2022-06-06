@@ -1,5 +1,10 @@
-import 'binary_calculator.dart';
+import 'string_converter.dart';
 
 void main() {
-  print(BinaryCalculator.toDecimal(111111));
+  print(StringConverter.findEntries([
+    'true',
+    'true',
+    'true',
+    'true',
+  ]));
 }
