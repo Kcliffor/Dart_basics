@@ -16,9 +16,9 @@ class StringConverter {
     Map<String, int> res = {};
     for (String val in list) {
       if (res.containsKey(val)) {
-        res.update(val, (value) => value++);
+        res.update(val, (value) => value += 1);
       } else {
-        res[val] = 0;
+        res[val] = 1;
       }
     }
     return res;
