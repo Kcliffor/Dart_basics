@@ -1,8 +1,6 @@
-import 'dart:math';
+num _abs(num x) => x <= 0 ? -x : x;
 
 class DelimetersCalculator {
-  static int _abs(int x) => x <= 0 ? -x : x;
-
   static int nod(int a, int b) {
     int res, dividend, divisor;
     if (_abs(a) >= _abs(b)) {
@@ -27,14 +25,14 @@ class DelimetersCalculator {
   static int nok(int a, int b) {
     int res = 1;
     int commonNum = nod(a, b);
-    res = (_abs(a * b)) ~/ commonNum;
+    res = _abs(a * b) ~/ commonNum;
     return res;
   }
 
   static List<int> simpleDigits(int num) {
-    num = _abs(num);
+    num = _abs(num).toInt();
     List<int> digitsList = [];
-    for (int i = 2; i <= sqrt(num); i++) {
+    for (int i = 2; i <= num.my_sqrt(2); i++) {
       while (num % i == 0) {
         digitsList.add(i);
         num ~/= i;
@@ -42,5 +40,22 @@ class DelimetersCalculator {
     }
     if (num != 1) digitsList.add(num);
     return digitsList;
+  }
+}
+
+extension Xnum on num {
+  double my_sqrt(num rootValue) {
+    double root = this / rootValue; // начальное приближение корня
+    num val = this; // значение корня последовательным делением
+
+    while (_abs(root - val) >= 1e-7) {
+      val = this;
+      for (int i = 1; i < rootValue; i++) {
+        val /= root;
+      }
+      root = 0.5 * (val + root);
+    }
+
+    return root;
   }
 }
